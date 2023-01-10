@@ -6,6 +6,7 @@
 * Can prompt to print ingredients with the recipe they're for
 * can re-run and keep certain recipes only
 * Make an ingredients type excel file and append this to the main pandas
+* Add web element for input and output
 
 ### Associated project - the pantry
 
