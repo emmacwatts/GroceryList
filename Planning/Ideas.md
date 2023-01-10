@@ -18,3 +18,4 @@
 ### To continue
 
 * 05/01 - setting up virtual enviornment into which grocerylist.py will go so that I can install packages
+* 10/01 - need to reference the github files rather than the cloned files so that it's the same between different devices
