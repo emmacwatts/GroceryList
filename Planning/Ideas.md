@@ -6,6 +6,7 @@
 * Can prompt to print ingredients with the recipe they're for
 * can re-run and keep certain recipes only
 * Make an ingredients type excel file and append this to the main pandas
+* Add web element for input and output
 
 ### Associated project - the pantry
 
@@ -17,3 +18,4 @@
 ### To continue
 
 * 05/01 - setting up virtual enviornment into which grocerylist.py will go so that I can install packages
+* 10/01 - need to reference the github files rather than the cloned files so that it's the same between different devices
