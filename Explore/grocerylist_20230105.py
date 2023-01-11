@@ -24,7 +24,7 @@ def userGrocerySpecs():
 #Define recipes
 
 #Pick recipes
-def defineLunchesandDinners():
+def defineLunchesandDinners(recipeInfodf):
     lunches = []
     dinners = []
     for recipe, type in zip(recipeInfodf["Recipe"], recipeInfodf["Meal Type"]):
@@ -34,8 +34,26 @@ def defineLunchesandDinners():
             dinners.append(recipe)
     return lunches, dinners
 
-def pickMeals():
-    
+def pickMeals(lunches, dinners, recipeInfodf, dinnerVol, dinnersType):
+    selectedDinners = []
+    firstSelectedDinner = random.choice(dinners)
+    selectedDinners.append(firstSelectedDinner)
+    selectedDinnerPortions = int(recipeInfodf.loc[recipeInfodf["Recipe"] == firstSelectedDinner, "Serves"])
+    if selectedDinnerPortions < int(dinnerVol):
+        remainingPortions = int(dinnerVol)-selectedDinnerPortions
+        if remainingPortions < max(int(recipeInfodf["Serves"])):
+            remainingPortionRecipes = recipeInfodf[recipeInfodf["Serves"] == remainingPortions]
+            nextSelectedDinner = random.choice(remainingPortions)
+            selectedDinners.append(nextSelectedDinner)
+            selectedDinnerPortions += int(recipeInfodf.loc[recipeInfodf["Recipe"] == nextSelectedDinner, "Serves"])
+
+    return selectedDinners
+
 #run.py
 dinnerVol, dinnersType = userGrocerySpecs()
-lunches, dinners = defineLunchesandDinners()
+lunches, dinners = defineLunchesandDinners(recipeInfodf)
+pickedMeals = pickMeals(lunches, dinners, recipeInfodf, dinnerVol, dinnersType)
+
+portions = 5
+portions = int(recipeInfodf.loc[recipeInfodf["Recipe"] == "Veggie Gyoza", "Serves"])
+print(portions)
