@@ -39,21 +39,30 @@ def pickMeals(lunches, dinners, recipeInfodf, dinnerVol, dinnersType):
     firstSelectedDinner = random.choice(dinners)
     selectedDinners.append(firstSelectedDinner)
     selectedDinnerPortions = int(recipeInfodf.loc[recipeInfodf["Recipe"] == firstSelectedDinner, "Serves"])
-    if selectedDinnerPortions < int(dinnerVol):
-        remainingPortions = int(dinnerVol)-selectedDinnerPortions
-        if remainingPortions < max(int(recipeInfodf["Serves"])):
-            remainingPortionRecipes = recipeInfodf[recipeInfodf["Serves"] == remainingPortions]
-            nextSelectedDinner = random.choice(remainingPortions)
-            selectedDinners.append(nextSelectedDinner)
-            selectedDinnerPortions += int(recipeInfodf.loc[recipeInfodf["Recipe"] == nextSelectedDinner, "Serves"])
+    # if selectedDinnerPortions < int(dinnerVol):
+    #     remainingPortions = int(dinnerVol)-selectedDinnerPortions
+    #     if remainingPortions < max(recipeInfodf["Serves"]):
+    #         remainingPortionRecipes = recipeInfodf[recipeInfodf["Serves"] == remainingPortions]
+    #         nextSelectedDinner = random.choice(remainingPortionRecipes)
+    #         selectedDinners.append(nextSelectedDinner)
+    #         selectedDinnerPortions += int(recipeInfodf.loc[recipeInfodf["Recipe"] == nextSelectedDinner, "Serves"])
 
     return selectedDinners
+
+def printIngredients(recipeIngredientsdf, pickedMeals):
+    groceryList = []
+    for meal in pickedMeals:
+        mealIngredientsdf = recipeIngredientsdf[recipeIngredientsdf["Recipe"] == meal]
+        for index, row in mealIngredientsdf.iterrows():
+            ingredientsAndQuantity = str(row["Ingredients"]) + " " + str(row["Quantity"]) + " " + str(row["Unit"])
+            groceryList.append(ingredientsAndQuantity)
+
+    return groceryList
 
 #run.py
 dinnerVol, dinnersType = userGrocerySpecs()
 lunches, dinners = defineLunchesandDinners(recipeInfodf)
 pickedMeals = pickMeals(lunches, dinners, recipeInfodf, dinnerVol, dinnersType)
+groceryList = printIngredients(recipeIngredientsdf, pickedMeals)
 
-portions = 5
-portions = int(recipeInfodf.loc[recipeInfodf["Recipe"] == "Veggie Gyoza", "Serves"])
-print(portions)
+print(groceryList)
