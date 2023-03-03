@@ -120,11 +120,9 @@ def getIngredientsListbySection(selectedMeals):
     selectedRecipes = selectedRecipes.sort_index()
     selectedRecipes = selectedRecipes.replace(np.nan, "")
 
-    selectedRecipes.to_excel("outputFiles/groceryList.xlsx")
-
     return selectedRecipes
 
-def makeGroceryList():
+def makeGroceryList(outputFile):
     """
     Makes a grocery list organised by ingredient type for the specified portion of recipes per meal type, defined by the user.
 
@@ -136,6 +134,8 @@ def makeGroceryList():
 
     selectedMeals = pickMeals(desiredPortions, mealTypeRecipes, mealTypePortions, possiblePortions)
 
-    getIngredientsListbySection(selectedMeals)
+    selectedRecipes = getIngredientsListbySection(selectedMeals)
 
-    return selectedMeals
+    selectedRecipes.to_excel("outputFiles/groceryList.xlsx")
+
+    return selectedRecipes
